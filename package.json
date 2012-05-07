@@ -2,7 +2,7 @@
   "author": "David Björklund <david.bjorklund@gmail.com> (http://davidbjorklund.se)",
   "name": "minmax",
   "description": "calculate the minimum and maximum value",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "https://github.com/kesla/node-minmax.git"
   },
