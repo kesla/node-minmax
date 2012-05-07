@@ -9,10 +9,12 @@ Calculate the minimum and maximum value.
   r(100);
   assert(r.min === 100);
   assert(r.max === 100);
+  assert(r.diff === 0);
 
-  r([200, -100]);
+  r([200, [-100]]);
   assert(r.max === 200);
   assert(r.min === -100);
+  assert(r.diff === 300);
 
   r = minmax({ min: 0}); // or max
   r(100);
