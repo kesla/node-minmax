@@ -1,4 +1,4 @@
-node-minmax
+node-minmax[![build status](https://secure.travis-ci.org/kesla/node-minmax.png)](http://travis-ci.org/kesla/node-minmax)
 ===========
 
 Calculate the minimum and maximum value.
