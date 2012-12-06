@@ -1,25 +1,25 @@
 var assert = require('assert');
 
 var MinMax = module.exports = function(opts) {
-  opts = opts || {};
+    opts = opts || {};
 
-  function minmax(val) {
-    if (Array.isArray(val)) {
-      val.forEach(function(v) { minmax(v); });
-    };
-    if (minmax.min === null || val < minmax.min) {
-      minmax.min = val;
+    function minmax(val) {
+        if (Array.isArray(val)) {
+            val.forEach(function(v) { minmax(v); });
+        };
+        if (minmax.min === null || val < minmax.min) {
+            minmax.min = val;
+        }
+        if (!minmax.max === null || val > minmax.max) {
+            minmax.max = val;
+        }
     }
-    if (!minmax.max === null || val > minmax.max) {
-      minmax.max = val;
-    }
-  }
-  minmax.min = opts.min === undefined? null : opts.min;
-  minmax.max = opts.max === undefined? null : opts.max;
-  minmax.__defineGetter__('diff', function() {
-    return minmax.max - minmax.min;
-  });
-  return minmax;
+    minmax.min = opts.min === undefined? null : opts.min;
+    minmax.max = opts.max === undefined? null : opts.max;
+    minmax.__defineGetter__('diff', function() {
+        return minmax.max - minmax.min;
+    });
+    return minmax;
 }
 
 var minmax = MinMax();
