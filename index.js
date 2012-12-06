@@ -1,10 +1,14 @@
 var assert = require('assert');
+var mean = require('running-mean');
 
 var minmax = module.exports = function() {
+    var r = mean();
     function minmax(val) {
         if (Array.isArray(val)) {
-            val.forEach(function(v) { minmax(v); });
+            return val.forEach(function(v) { minmax(v); });
         };
+        r.push(val);
+        minmax.mean = r.mean;
         if (minmax.min === null || val < minmax.min) {
             minmax.min = val;
             minmax.diff = minmax.max - minmax.min;
@@ -25,13 +29,15 @@ mm(4711);
 assert.strictEqual(mm.min, 4711);
 assert.strictEqual(mm.max, 4711);
 assert.strictEqual(mm.diff, 0);
+assert.strictEqual(mm.mean, 4711);
 
 mm = minmax();
 mm(0);
-mm(-4711);
+mm(-4712);
 assert.strictEqual(mm.max, 0);
-assert.strictEqual(mm.min, -4711);
-assert.strictEqual(mm.diff,4711);
+assert.strictEqual(mm.min, -4712);
+assert.strictEqual(mm.diff, 4712);
+assert.strictEqual(mm.mean, -2356);
 
 mm = minmax();
 mm(new Date(0));

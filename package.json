@@ -10,7 +10,9 @@
   "scripts": {
     "test": "node index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "running-mean": "0.0.0"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
