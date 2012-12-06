@@ -9,16 +9,16 @@ var minmax = module.exports = function(opts) {
         };
         if (minmax.min === null || val < minmax.min) {
             minmax.min = val;
+            minmax.diff = minmax.max - minmax.min;
         }
         if (!minmax.max === null || val > minmax.max) {
             minmax.max = val;
+            minmax.diff = minmax.max - minmax.min;
         }
     }
     minmax.min = opts.min === undefined? null : opts.min;
     minmax.max = opts.max === undefined? null : opts.max;
-    minmax.__defineGetter__('diff', function() {
-        return minmax.max - minmax.min;
-    });
+    minmax.diff = minmax.max - minmax.min;
     return minmax;
 }
 
