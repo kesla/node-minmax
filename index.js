@@ -1,8 +1,6 @@
 var assert = require('assert');
 
-var minmax = module.exports = function(opts) {
-    opts = opts || {};
-
+var minmax = module.exports = function() {
     function minmax(val) {
         if (Array.isArray(val)) {
             val.forEach(function(v) { minmax(v); });
@@ -11,14 +9,14 @@ var minmax = module.exports = function(opts) {
             minmax.min = val;
             minmax.diff = minmax.max - minmax.min;
         }
-        if (!minmax.max === null || val > minmax.max) {
+        if (minmax.max === null || val > minmax.max) {
             minmax.max = val;
             minmax.diff = minmax.max - minmax.min;
         }
     }
-    minmax.min = opts.min === undefined? null : opts.min;
-    minmax.max = opts.max === undefined? null : opts.max;
-    minmax.diff = minmax.max - minmax.min;
+    minmax.min = null;
+    minmax.max = null;
+    minmax.diff = null;
     return minmax;
 }
 
@@ -28,17 +26,12 @@ assert.strictEqual(mm.min, 4711);
 assert.strictEqual(mm.max, 4711);
 assert.strictEqual(mm.diff, 0);
 
-mm = minmax({ max: 0 });
+mm = minmax();
+mm(0);
 mm(-4711);
 assert.strictEqual(mm.max, 0);
 assert.strictEqual(mm.min, -4711);
 assert.strictEqual(mm.diff,4711);
-
-mm = minmax({ min: 0 });
-mm(4711);
-assert.strictEqual(mm.max, 4711);
-assert.strictEqual(mm.min, 0);
-assert.strictEqual(mm.diff, 4711);
 
 mm = minmax();
 mm(new Date(0));
